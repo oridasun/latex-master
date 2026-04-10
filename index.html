@@ -16,6 +16,12 @@
   <link rel="icon" type="image/png" sizes="128x128" href="favicon-128.png" />
   <link rel="icon" type="image/png" sizes="512x512" href="favicon.png" />
   <link rel="apple-touch-icon"      sizes="512x512" href="favicon.png" />
+  <link rel="manifest" href="manifest.json" />
+  <meta name="theme-color" content="#1e293b" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="LaTeX Master" />
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
@@ -174,5 +180,12 @@
   </script>
   <script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
   <script defer src="app.js"></script>
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('./sw.js');
+      });
+    }
+  </script>
 </body>
 </html>

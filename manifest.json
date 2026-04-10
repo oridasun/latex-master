@@ -1,0 +1,25 @@
+{
+  "name": "LaTeX Master",
+  "short_name": "LaTeX Master",
+  "description": "Convierte y limpia código LaTeX de tus textos",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#f5f7fa",
+  "theme_color": "#1e293b",
+  "orientation": "any",
+  "lang": "es",
+  "icons": [
+    {
+      "src": "favicon-128.png",
+      "sizes": "128x128",
+      "type": "image/png"
+    },
+    {
+      "src": "favicon.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
