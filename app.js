@@ -19,7 +19,7 @@ const dict = {
     btnConvert:   'Limpiar texto',
     btnCopy:      'Copiar resultado',
     btnDownload:  'Descargar HTML',
-    btnDownloadPdf: 'Descargar PDF',
+    btnDownloadPdf: '🖨 Imprimir / PDF',
     modeRender:   '🖼 Renderizar como imágenes',
     modeUnicode:  'Unicode (√, α, ½)',
     modePlain:    'Texto plano (sqrt, alpha, 1/2)',
@@ -54,7 +54,7 @@ const dict = {
     btnConvert:   'Clean text',
     btnCopy:      'Copy result',
     btnDownload:  'Download HTML',
-    btnDownloadPdf: 'Download PDF',
+    btnDownloadPdf: '🖨 Print / PDF',
     modeRender:   '🖼 Render as images',
     modeUnicode:  'Unicode (√, α, ½)',
     modePlain:    'Plain text (sqrt, alpha, 1/2)',
@@ -577,64 +577,36 @@ function downloadHTML(inputHTML) {
   URL.revokeObjectURL(url);
 }
 
-/** Download PDF — generates a real .pdf file using html2pdf.js (no print dialog) */
-async function downloadPDF(outputHTML) {
-  const btn = document.getElementById('btn-download-pdf');
-  const origText = btn.textContent;
-  btn.disabled = true;
-  btn.textContent = '…';
-
-  try {
-    // Lazy-load html2pdf.js from CDN on first use
-    if (!window.html2pdf) {
-      await new Promise((resolve, reject) => {
-        const s = Object.assign(document.createElement('script'), {
-          src: 'https://cdn.jsdelivr.net/npm/html2pdf.js@0.10.1/dist/html2pdf.bundle.min.js',
-          onload: resolve,
-          onerror: () => reject(new Error('html2pdf.js no se pudo cargar')),
-        });
-        document.head.appendChild(s);
-      });
-    }
-
-    // html2canvas needs the element in the viewport to render correctly.
-    // We show a full-screen loading overlay, then place the content element
-    // underneath it — html2canvas captures the specific element, not the screen,
-    // so the overlay doesn't interfere with rendering.
-    const overlay = document.createElement('div');
-    overlay.style.cssText = 'position:fixed;inset:0;z-index:10000;background:rgba(255,255,255,.97);display:flex;align-items:center;justify-content:center;font-family:system-ui,sans-serif;font-size:1.1rem;color:#334155';
-    overlay.textContent = '📄 Generando PDF…';
-    document.body.appendChild(overlay);
-
-    const wrap = document.createElement('div');
-    wrap.style.cssText = 'position:fixed;top:0;left:0;width:794px;background:white;z-index:9999;padding:20px 30px;font-family:Georgia,serif;font-size:16px;line-height:1.8;color:#1e293b';
-    wrap.innerHTML = outputHTML;
-    wrap.querySelectorAll('.fml-img--block').forEach(img => {
-      img.style.display = 'block';
-      img.style.margin  = '8px auto';
-    });
-    document.body.appendChild(wrap);
-
-    try {
-      await window.html2pdf().set({
-        margin:      [15, 20, 15, 20],
-        filename:    'latex-master-resultado.pdf',
-        image:       { type: 'png', quality: 1 },
-        html2canvas: { scale: 2, useCORS: true, logging: false },
-        jsPDF:       { unit: 'mm', format: 'a4', orientation: 'portrait' },
-        pagebreak:   { mode: ['css', 'legacy'] },
-      }).from(wrap).save();
-    } finally {
-      document.body.removeChild(wrap);
-      document.body.removeChild(overlay);
-    }
-  } catch (err) {
-    console.error('PDF error:', err);
-    alert('No se pudo generar el PDF: ' + err.message);
-  } finally {
-    btn.textContent = origText;
-    btn.disabled = false;
+/** Print / Save as PDF — opens the browser print dialog (works with MathJax SVGs) */
+function printOutput(outputHTML) {
+  const win = window.open('', '_blank');
+  if (!win) {
+    alert('Permite las ventanas emergentes para poder imprimir.');
+    return;
   }
+  win.document.write(`<!DOCTYPE html>
+<html lang="${document.documentElement.lang}">
+<head>
+  <meta charset="UTF-8"/>
+  <title>LaTeX Master – Resultado</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      font-size: 13pt;
+      line-height: 1.75;
+      margin: 2cm;
+      color: #000;
+    }
+    img { max-width: 100%; vertical-align: middle; }
+    @media print { body { margin: 1.5cm; } }
+  </style>
+</head>
+<body>${outputHTML}</body>
+</html>`);
+  win.document.close();
+  win.focus();
+  // Small delay so SVG images finish rendering before the dialog opens
+  setTimeout(() => { win.print(); }, 300);
 }
 
 /* ============================================================
@@ -808,7 +780,7 @@ document.addEventListener('DOMContentLoaded', () => {
   });
   document.getElementById('btn-download-pdf').addEventListener('click', () => {
     const box = document.getElementById('output-text');
-    if (!box.classList.contains('empty')) downloadPDF(box.innerHTML);
+    if (!box.classList.contains('empty')) printOutput(box.innerHTML);
   });
 
   /* --- Language toggle --- */
