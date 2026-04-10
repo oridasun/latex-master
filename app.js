@@ -39,11 +39,18 @@ const dict = {
     linkFaq:      '❓ Preguntas Frecuentes',
     linkSupport:  '✉️ Contactar soporte',
     linkCoffee:   '☕ Invítame a un café',
+    heroDesc:     '¿Tienes un documento con fórmulas LaTeX como <code>$\\frac{1}{2}$</code> o <code>\\sqrt{x}</code>? LaTeX Master las convierte a texto legible o imágenes de alta calidad con un solo clic, sin instalar nada.',
+    heroBeforeLabel: 'TEXTO ORIGINAL',
+    heroAfterLabel:  'RESULTADO',
+    modeRenderDesc:  'Ideal para Word, Google Docs o Notion',
+    modeUnicodeDesc: 'Para texto digital con símbolos matemáticos',
+    modePlainDesc:   'Para email, código o apps sin soporte de símbolos',
+    placeholder:  'Ejemplo: La energía es $E = mc^2$ y la raíz $\\sqrt{a^2 + b^2}$. Pega aquí tu texto con fórmulas LaTeX...',
   },
   en: {
     title:        'LaTeX Master',
     subtitle:     'Clean LaTeX code from your texts',
-    placeholder:  'Paste text with LaTeX code here...',
+    placeholder:  'Example: The energy is $E = mc^2$ and the root $\\sqrt{a^2 + b^2}$. Paste your text with LaTeX formulas here...',
     btnConvert:   'Clean text',
     btnCopy:      'Copy result',
     btnDownload:  'Download HTML',
@@ -67,6 +74,12 @@ const dict = {
     linkFaq:      '❓ FAQ',
     linkSupport:  '✉️ Contact support',
     linkCoffee:   '☕ Buy me a coffee',
+    heroDesc:     'Do you have a document with LaTeX formulas like <code>$\\frac{1}{2}$</code> or <code>\\sqrt{x}</code>? LaTeX Master converts them to readable text or high-quality images in one click, with no installation required.',
+    heroBeforeLabel: 'ORIGINAL TEXT',
+    heroAfterLabel:  'RESULT',
+    modeRenderDesc:  'Ideal for Word, Google Docs or Notion',
+    modeUnicodeDesc: 'For digital text with mathematical symbols',
+    modePlainDesc:   'For email, code or apps without symbol support',
   },
 };
 
@@ -636,16 +649,21 @@ function applyLang() {
     'app-title': 'title', 'app-subtitle': 'subtitle',
     'btn-convert': 'btnConvert', 'btn-copy': 'btnCopy', 'btn-download': 'btnDownload', 'btn-download-pdf': 'btnDownloadPdf',
     'label-render': 'modeRender', 'label-unicode': 'modeUnicode', 'label-plain': 'modePlain',
+    'desc-render': 'modeRenderDesc', 'desc-unicode': 'modeUnicodeDesc', 'desc-plain': 'modePlainDesc',
     'result-title': 'resultTitle', 'style-label': 'styleLabel',
     'style-size-lbl': 'styleSize', 'style-color-lbl': 'styleColor',
     'style-bold-lbl': 'styleBold', 'style-bg-lbl': 'styleBg',
     'help-title': 'helpTitle', 'link-faq': 'linkFaq', 'link-support': 'linkSupport',
     'link-coffee': 'linkCoffee',
+    'hero-before-label': 'heroBeforeLabel', 'hero-after-label': 'heroAfterLabel',
   };
   for (const [id, key] of Object.entries(ids)) {
     const el = document.getElementById(id);
     if (el) el.textContent = t(key);
   }
+  // heroDesc uses innerHTML to allow <code> tags
+  const heroDescEl = document.getElementById('hero-desc');
+  if (heroDescEl) heroDescEl.innerHTML = t('heroDesc');
   ['btn-convert','btn-copy','btn-download','btn-download-pdf'].forEach(id => {
     const el = document.getElementById(id);
     if (el) el.setAttribute('aria-label', el.textContent);

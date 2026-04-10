@@ -33,20 +33,45 @@
 
   <main class="container" role="main">
 
+    <!-- Hero / intro section -->
+    <section class="hero-section" aria-label="Descripción de la aplicación">
+      <p id="hero-desc" class="hero-desc"></p>
+      <div class="hero-example" aria-hidden="true">
+        <div class="hero-col">
+          <span id="hero-before-label" class="hero-tag hero-tag--before"></span>
+          <code class="hero-code">$\frac{1}{2} + \sqrt{x^2+1} \leq \alpha$</code>
+        </div>
+        <div class="hero-arrow">→</div>
+        <div class="hero-col">
+          <span id="hero-after-label" class="hero-tag hero-tag--after"></span>
+          <code class="hero-code hero-code--result">½ + √(x²+1) ≤ α</code>
+        </div>
+      </div>
+    </section>
+
     <!-- Mode selector -->
     <fieldset class="mode-fieldset" aria-labelledby="mode-legend">
       <legend id="mode-legend" class="sr-only">Conversion mode</legend>
       <label class="mode-label">
         <input type="radio" name="mode" value="render" checked aria-describedby="mode-legend" />
-        <span id="label-render"></span>
+        <span class="mode-label-text">
+          <span id="label-render"></span>
+          <small id="desc-render" class="mode-desc"></small>
+        </span>
       </label>
       <label class="mode-label">
         <input type="radio" name="mode" value="unicode" aria-describedby="mode-legend" />
-        <span id="label-unicode"></span>
+        <span class="mode-label-text">
+          <span id="label-unicode"></span>
+          <small id="desc-unicode" class="mode-desc"></small>
+        </span>
       </label>
       <label class="mode-label">
         <input type="radio" name="mode" value="plain" aria-describedby="mode-legend" />
-        <span id="label-plain"></span>
+        <span class="mode-label-text">
+          <span id="label-plain"></span>
+          <small id="desc-plain" class="mode-desc"></small>
+        </span>
       </label>
     </fieldset>
 
