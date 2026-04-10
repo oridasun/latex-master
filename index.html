@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LaTeX Master – Limpia código LaTeX de tus textos</title>
+  <meta name="description" content="Convierte y elimina código LaTeX de tus textos. Soporta fracciones, raíces, letras griegas, operadores, subíndices y superíndices." />
+  <meta name="keywords" content="LaTeX, limpiar LaTeX, convertir LaTeX, unicode, matemáticas, fórmulas" />
+  <meta name="author" content="iciencia.net" />
+  <meta property="og:title" content="LaTeX Master – Limpia código LaTeX" />
+  <meta property="og:description" content="Convierte y elimina código LaTeX de tus textos fácilmente." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://iciencia.net/latex-master/" />
+  <link rel="canonical" href="https://iciencia.net/latex-master/" />
+  <link rel="icon" type="image/png" sizes="32x32"  href="favicon-32.png" />
+  <link rel="icon" type="image/png" sizes="128x128" href="favicon-128.png" />
+  <link rel="icon" type="image/png" sizes="512x512" href="favicon.png" />
+  <link rel="apple-touch-icon"      sizes="512x512" href="favicon.png" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <header class="app-header" role="banner">
+    <div class="header-inner">
+      <img src="favicon.png" alt="LaTeX Master logo" class="logo" width="40" height="40" />
+      <div class="header-text">
+        <h1 id="app-title" class="app-title"></h1>
+        <p id="app-subtitle" class="app-subtitle"></p>
+      </div>
+      <button id="lang-toggle" class="lang-btn" aria-label="Switch language / Cambiar idioma">EN / ES</button>
+    </div>
+  </header>
+
+  <main class="container" role="main">
+
+    <!-- Mode selector -->
+    <fieldset class="mode-fieldset" aria-labelledby="mode-legend">
+      <legend id="mode-legend" class="sr-only">Conversion mode</legend>
+      <label class="mode-label">
+        <input type="radio" name="mode" value="render" checked aria-describedby="mode-legend" />
+        <span id="label-render"></span>
+      </label>
+      <label class="mode-label">
+        <input type="radio" name="mode" value="unicode" aria-describedby="mode-legend" />
+        <span id="label-unicode"></span>
+      </label>
+      <label class="mode-label">
+        <input type="radio" name="mode" value="plain" aria-describedby="mode-legend" />
+        <span id="label-plain"></span>
+      </label>
+    </fieldset>
+
+    <!-- Formula style panel (visible only in render mode) -->
+    <div id="formula-style-panel" class="formula-style-panel" aria-label="Formula style options">
+      <span id="style-label" class="style-label"></span>
+
+      <label class="style-control">
+        <span id="style-size-lbl"></span>
+        <input type="number" id="fs-size" value="18" min="10" max="48" step="1"
+               aria-label="Font size" />
+        <span id="fs-size-val" class="style-unit">18px</span>
+      </label>
+
+      <label class="style-control">
+        <span id="style-color-lbl"></span>
+        <input type="color" id="fs-color" value="#000000" aria-label="Formula color" />
+      </label>
+
+      <label class="style-control style-control--check">
+        <input type="checkbox" id="fs-bold" aria-label="Bold formulas" />
+        <span id="style-bold-lbl"></span>
+      </label>
+
+      <label class="style-control">
+        <span id="style-bg-lbl"></span>
+        <select id="fs-bg" aria-label="Formula background">
+          <option value="#ffffff"></option>
+          <option value="transparent"></option>
+        </select>
+      </label>
+    </div>
+
+    <!-- Input -->
+    <section class="panel" aria-label="Input">
+      <div
+        id="input-text"
+        class="text-area"
+        contenteditable="true"
+        role="textbox"
+        aria-multiline="true"
+        aria-label="Input LaTeX text"
+        spellcheck="false"
+        data-placeholder=""
+      ></div>
+      <button id="btn-convert" class="btn btn-primary" aria-label="Convert text"></button>
+    </section>
+
+    <!-- Output -->
+    <section class="panel" aria-label="Output" aria-live="polite">
+      <p id="result-title" class="result-label"></p>
+      <div
+        id="output-text"
+        class="output-box"
+        role="region"
+        aria-label="Converted text"
+        tabindex="0"
+      ></div>
+      <div class="output-actions">
+        <button id="btn-copy"         class="btn btn-secondary" aria-label="Copy result" disabled></button>
+        <button id="btn-download"     class="btn btn-outline"   aria-label="Download HTML" disabled></button>
+        <button id="btn-download-pdf" class="btn btn-outline"   aria-label="Download PDF"  disabled></button>
+      </div>
+    </section>
+
+    <!-- Help / links -->
+    <aside class="help-panel" aria-labelledby="help-title">
+      <h2 id="help-title" class="help-heading"></h2>
+      <ul class="help-links" role="list">
+        <li><a id="link-faq"     href="https://iciencia.net/faq"     target="_blank" rel="noopener noreferrer"></a></li>
+        <li><a id="link-support" href="mailto:soporte@iciencia.net"                                           ></a></li>
+        <li><a id="link-rate"    href="https://iciencia.net/rate"    target="_blank" rel="noopener noreferrer"></a></li>
+        <li><a id="link-coffee"  href="https://buymeacoffee.com"     target="_blank" rel="noopener noreferrer"></a></li>
+      </ul>
+    </aside>
+
+  </main>
+
+  <footer class="app-footer" role="contentinfo">
+    <p>&copy; <span id="year"></span> <a href="https://iciencia.net" target="_blank" rel="noopener noreferrer">iciencia.net</a></p>
+  </footer>
+
+  <script>
+    window.MathJax = {
+      loader: { load: ['input/tex-full', 'output/svg'] },
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        processEscapes: true,
+      },
+      svg: { fontCache: 'local', scale: 1 },
+      startup: { typeset: false },
+    };
+  </script>
+  <script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+  <script defer src="app.js"></script>
+</body>
+</html>
