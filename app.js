@@ -38,7 +38,6 @@ const dict = {
     helpTitle:    '¿Necesitas ayuda?',
     linkFaq:      '❓ Preguntas Frecuentes',
     linkSupport:  '✉️ Contactar soporte',
-    linkRate:     '⭐ Valorar la aplicación',
     linkCoffee:   '☕ Invítame a un café',
   },
   en: {
@@ -67,7 +66,6 @@ const dict = {
     helpTitle:    'Need help?',
     linkFaq:      '❓ FAQ',
     linkSupport:  '✉️ Contact support',
-    linkRate:     '⭐ Rate this app',
     linkCoffee:   '☕ Buy me a coffee',
   },
 };
@@ -642,7 +640,7 @@ function applyLang() {
     'style-size-lbl': 'styleSize', 'style-color-lbl': 'styleColor',
     'style-bold-lbl': 'styleBold', 'style-bg-lbl': 'styleBg',
     'help-title': 'helpTitle', 'link-faq': 'linkFaq', 'link-support': 'linkSupport',
-    'link-rate': 'linkRate', 'link-coffee': 'linkCoffee',
+    'link-coffee': 'linkCoffee',
   };
   for (const [id, key] of Object.entries(ids)) {
     const el = document.getElementById(id);

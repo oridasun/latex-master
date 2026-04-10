@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FAQ – LaTeX Master</title>
+  <meta name="description" content="Preguntas frecuentes sobre LaTeX Master: cómo funciona, modos de conversión, privacidad y más." />
+  <link rel="icon" type="image/png" sizes="32x32"  href="favicon-32.png" />
+  <link rel="icon" type="image/png" sizes="128x128" href="favicon-128.png" />
+  <link rel="icon" type="image/png" sizes="512x512" href="favicon.png" />
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .page-content {
+      max-width: 760px;
+      margin: 1.5rem auto;
+      padding: 0 1rem 2rem;
+    }
+    .page-content h1 {
+      font-size: 1.6rem;
+      font-weight: 700;
+      margin-bottom: 1.5rem;
+      color: var(--color-text);
+    }
+    .faq-item {
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius);
+      padding: 1.1rem 1.25rem;
+      box-shadow: var(--shadow);
+      margin-bottom: .85rem;
+    }
+    .faq-item h2 {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--color-primary);
+      margin-bottom: .5rem;
+    }
+    .faq-item p {
+      font-size: .95rem;
+      line-height: 1.65;
+      color: var(--color-text);
+    }
+    .faq-item code {
+      font-family: var(--font-mono);
+      background: #f0f4ff;
+      border: 1px solid #d1d9e6;
+      border-radius: 4px;
+      padding: .1em .4em;
+      font-size: .88em;
+    }
+    .faq-item ul {
+      margin: .5rem 0 0 1.2rem;
+      font-size: .95rem;
+      line-height: 1.7;
+    }
+    .back-link {
+      display: inline-block;
+      margin-bottom: 1.25rem;
+      color: var(--color-primary);
+      font-size: .9rem;
+      text-decoration: none;
+      font-weight: 600;
+    }
+    .back-link:hover { text-decoration: underline; }
+  </style>
+</head>
+<body>
+
+  <header class="app-header" role="banner">
+    <div class="header-inner">
+      <img src="favicon.png" alt="LaTeX Master logo" class="logo" width="40" height="40" />
+      <div class="header-text">
+        <h1 class="app-title">LaTeX Master</h1>
+        <p class="app-subtitle">Preguntas Frecuentes</p>
+      </div>
+    </div>
+  </header>
+
+  <main class="page-content" role="main">
+    <a href="index.html" class="back-link">← Volver a la aplicación</a>
+    <h1>Preguntas Frecuentes (FAQ)</h1>
+
+    <div class="faq-item">
+      <h2>¿Qué es LaTeX Master?</h2>
+      <p>LaTeX Master es una aplicación web gratuita que convierte o elimina el código LaTeX incrustado en textos. Es especialmente útil cuando recibes documentos académicos, científicos o matemáticos con fórmulas LaTeX y necesitas un texto limpio y legible sin necesidad de instalar ningún programa.</p>
+    </div>
+
+    <div class="faq-item">
+      <h2>¿Necesito instalar algo para usarla?</h2>
+      <p>No. LaTeX Master funciona directamente en el navegador, sin instalaciones, sin registro y sin ninguna dependencia externa. Solo necesitas acceso a internet para cargar el motor matemático (MathJax) cuando usas el modo Renderizar.</p>
+    </div>
+
+    <div class="faq-item">
+      <h2>¿Qué modos de conversión están disponibles?</h2>
+      <p>La aplicación ofrece tres modos:</p>
+      <ul>
+        <li><strong>Renderizar como imágenes:</strong> convierte cada fórmula LaTeX en una imagen vectorial (SVG) de alta calidad, lista para pegar en Word, Google Docs, Notion, etc.</li>
+        <li><strong>Unicode:</strong> sustituye el código LaTeX por caracteres Unicode equivalentes (por ejemplo, <code>\alpha</code> → α, <code>\frac{1}{2}</code> → ½).</li>
+        <li><strong>Texto plano:</strong> convierte las fórmulas a texto ASCII legible (por ejemplo, <code>\sqrt{x}</code> → <code>sqrt(x)</code>).</li>
+      </ul>
+    </div>
+
+    <div class="faq-item">
+      <h2>¿Cómo uso el modo "Renderizar como imágenes"?</h2>
+      <p>Selecciona el modo <strong>Renderizar como imágenes</strong>, pega tu texto con fórmulas LaTeX en el cuadro de entrada y pulsa <strong>Limpiar texto</strong> (o <code>Ctrl+Enter</code>). La primera vez puede tardar unos segundos en cargar el motor matemático. El resultado mostrará el texto con las fórmulas reemplazadas por imágenes SVG que puedes copiar o descargar.</p>
+    </div>
+
+    <div class="faq-item">
+      <h2>¿Puedo personalizar el aspecto de las fórmulas renderizadas?</h2>
+      <p>Sí. En el modo Renderizar aparece un panel de estilo donde puedes ajustar el <strong>tamaño</strong> (10–48 px), el <strong>color</strong> del texto matemático, activar <strong>negrita</strong> y elegir entre fondo <strong>blanco</strong> o <strong>transparente</strong>.</p>
+    </div>
+
+    <div class="faq-item">
+      <h2>¿Qué tipos de código LaTeX soporta la conversión?</h2>
+      <p>La aplicación reconoce los delimitadores habituales (<code>$...$</code>, <code>$$...$$</code>, <code>\(...\)</code>, <code>\[...\]</code>) y convierte más de 100 comandos, entre ellos:</p>
+      <ul>
+        <li>Fracciones: <code>\frac{a}{b}</code></li>
+        <li>Raíces: <code>\sqrt{x}</code>, <code>\sqrt[n]{x}</code></li>
+        <li>Letras griegas: <code>\alpha</code>, <code>\Sigma</code>, <code>\omega</code>…</li>
+        <li>Operadores: <code>\times</code>, <code>\leq</code>, <code>\neq</code>, <code>\approx</code>…</li>
+        <li>Cálculo: <code>\sum</code>, <code>\int</code>, <code>\partial</code>, <code>\infty</code>…</li>
+        <li>Flechas: <code>\rightarrow</code>, <code>\Rightarrow</code>…</li>
+        <li>Super y subíndices: <code>x^2</code>, <code>x_n</code></li>
+      </ul>
+    </div>
+
+    <div class="faq-item">
+      <h2>¿Por qué algunas fórmulas aparecen resaltadas en amarillo?</h2>
+      <p>Cuando el modo Renderizar no puede procesar una fórmula (por ejemplo, porque usa sintaxis LaTeX muy avanzada o poco común), la muestra resaltada en amarillo con el código original para que sepas que no se pudo convertir. En ese caso, prueba el modo Unicode o Texto plano.</p>
+    </div>
+
+    <div class="faq-item">
+      <h2>¿Puedo descargar el resultado?</h2>
+      <p>Sí. Una vez convertido el texto, puedes:</p>
+      <ul>
+        <li><strong>Copiar</strong> el resultado al portapapeles con un solo clic.</li>
+        <li><strong>Descargar HTML</strong> para obtener un archivo que conserva el formato e imágenes.</li>
+        <li><strong>Descargar PDF</strong> para generar un documento listo para imprimir o compartir.</li>
+      </ul>
+    </div>
+
+    <div class="faq-item">
+      <h2>¿La aplicación guarda o envía mis textos a algún servidor?</h2>
+      <p>No. Todo el procesamiento ocurre <strong>localmente en tu navegador</strong>. Ningún texto que introduzcas se envía a ningún servidor externo. Consulta nuestra <a href="privacy.html">Política de Privacidad</a> para más detalles.</p>
+    </div>
+
+    <div class="faq-item">
+      <h2>¿Funciona en dispositivos móviles?</h2>
+      <p>Sí. La interfaz es totalmente responsiva y funciona en smartphones y tablets. Para una experiencia óptima con fórmulas complejas se recomienda usar un navegador actualizado (Chrome, Firefox, Edge o Safari).</p>
+    </div>
+
+    <div class="faq-item">
+      <h2>¿Cómo cambio el idioma de la interfaz?</h2>
+      <p>Pulsa el botón <strong>EN / ES</strong> en la esquina superior derecha del encabezado. La aplicación detecta automáticamente el idioma de tu navegador al cargar, pero puedes cambiarlo en cualquier momento.</p>
+    </div>
+
+    <div class="faq-item">
+      <h2>¿Existe un atajo de teclado para convertir rápido?</h2>
+      <p>Sí. Mientras el cursor esté en el cuadro de texto, pulsa <code>Ctrl+Enter</code> (Windows/Linux) o <code>Cmd+Enter</code> (Mac) para lanzar la conversión sin necesidad de hacer clic en el botón.</p>
+    </div>
+
+    <div class="faq-item">
+      <h2>¿La aplicación es gratuita?</h2>
+      <p>Sí, LaTeX Master es completamente gratuita y sin publicidad. Si te resulta útil, puedes apoyar su desarrollo <a href="https://buymeacoffee.com/iciencia" target="_blank" rel="noopener noreferrer">invitándome a un café ☕</a>.</p>
+    </div>
+
+    <div class="faq-item">
+      <h2>¿Cómo puedo contactar con soporte?</h2>
+      <p>Puedes escribirnos a <a href="mailto:info@iciencia.net">info@iciencia.net</a> y te responderemos lo antes posible.</p>
+    </div>
+
+  </main>
+
+  <footer class="app-footer" role="contentinfo">
+    <p>&copy; <script>document.write(new Date().getFullYear())</script> <a href="https://iciencia.net" target="_blank" rel="noopener noreferrer">iciencia.net</a>
+    &nbsp;·&nbsp; <a href="terms.html">Condiciones del servicio</a>
+    &nbsp;·&nbsp; <a href="privacy.html">Privacidad</a></p>
+  </footer>
+
+</body>
+</html>
